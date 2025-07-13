@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const UserModel = require("../models/usermodel");
 const sendVerifyEmail = require("../utils/sendVerifyEmail");
 
+
+
 const verifyEmail = async (userId) => {
   const user = await UserModel.findById(userId);
   if (!user) {
@@ -15,6 +17,12 @@ const verifyEmail = async (userId) => {
 
 // Register
 const register = async (userData) => {
+
+     if (!userData.email || !userData.password) {
+    throw new Error("Email və şifrə mütləqdir!");
+  }
+
+  
   const duplicateUser = await UserModel.findOne({
     email: userData.email.toLowerCase(),
   });
@@ -23,18 +31,17 @@ const register = async (userData) => {
   }
 
   const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+
   const user = new UserModel({
     ...userData,
+    email: userData.email.toLowerCase(),
     password: hashedPassword,
+ 
   });
 
   const newUser = await user.save();
 
-  await sendVerifyEmail({
-    fullName: newUser.fullName,
-    email: newUser.email,
-    userId: newUser._id,
-  });
 
   return newUser;
 };

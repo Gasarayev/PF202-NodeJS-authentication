@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 
 
-const sendVerifyEmail = async ({ fullName, email, userId }) => {
+const sendVerifyEmail = async ({ fullName, email, verifyLink }) => {
   const mailOptions = {
     
     from: EMAIL_USER,
@@ -72,7 +72,7 @@ const sendVerifyEmail = async ({ fullName, email, userId }) => {
       Siz uğurla qeydiyyatdan keçdiniz. Bizimlə olduğunuz üçün çox şadıq!<br>
       Hesabınızı aktivləşdirmək üçün aşağıdakı düyməyə klikləyin:
     </p>
-    <a href="http://localhost:5050/api/verify-email/${userId}" class="button">Emaili təsdiqlə</a>
+      ${verifyLink}
     <p>
       Əgər siz bu əməliyyatı etməmisinizsə, zəhmət olmasa bu emaili nəzərə almayın.
     </p>

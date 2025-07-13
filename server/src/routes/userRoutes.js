@@ -8,11 +8,11 @@ const {
   verifyEmailController,
 } = require("../controllers/userController");
 
-// Auth routes (tokensiz versiya)
+
 router.post("/register", registerUserController);
 router.post("/login", loginUserController);
 router.get("/profile", getProfileController);  
-router.get("/verify-email/:id", verifyEmailController);
+router.get("/verify-email/:token", verifyEmailController);
 
 
 module.exports = router;

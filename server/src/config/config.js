@@ -12,4 +12,7 @@ module.exports = {
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
   EMAIL_USER: process.env.EMAIL_USER,
   EMAIL_PASS: process.env.EMAIL_PASS,
+  SERVER_URL: process.env.SERVER_URL,
+  CLIENT_URL: process.env.CLIENT_URL,
+  JWT_SECRET : process.env.JWT_SECRET
 };

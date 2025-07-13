@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use("/api", userRoutes);
+app.use("/auth", userRoutes);
 
 
 module.exports = app;

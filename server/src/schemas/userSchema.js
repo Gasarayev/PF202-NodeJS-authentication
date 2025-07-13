@@ -26,6 +26,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    verificationToken: {
+      type: String,
+      default: null,
+    },
   },
   { timestamps: true, versionKey: false }
 );
