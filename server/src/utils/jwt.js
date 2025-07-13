@@ -22,7 +22,9 @@ const verifyJWTtoken = (token) => {
     }
 };
 
+
 module.exports = {
   generateJWTtoken,
   verifyJWTtoken,
+ 
 };

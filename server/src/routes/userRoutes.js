@@ -7,11 +7,12 @@ const {
   getProfileController,
   verifyEmailController,
 } = require("../controllers/userController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 
 router.post("/register", registerUserController);
 router.post("/login", loginUserController);
-router.get("/profile", getProfileController);  
+router.get("/profile", authMiddleware, getProfileController); 
 router.get("/verify-email/:token", verifyEmailController);
 
 
