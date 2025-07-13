@@ -9,10 +9,9 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true, 
+      unique: true,
       lowercase: true,
     },
-    
 
     password: {
       type: String,
@@ -23,17 +22,9 @@ const userSchema = new Schema(
       enum: ["client", "admin"],
       default: "client",
     },
-    emailVerified: { type: Boolean, default: false },
-
-
-    authType: {
-      type: String,
-      enum: ["google", "local"],
-      default: "local",
-    },
-    googleId: {
-      type: String,
-      default: null,
+    emailVerified: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true, versionKey: false }
