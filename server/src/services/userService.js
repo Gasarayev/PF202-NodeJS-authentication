@@ -4,6 +4,13 @@ const sendVerifyEmail = require("../utils/sendVerifyEmail");
 
 
 
+// verifyEmail funksiyası nə edir?
+// 1. Gələn userId ilə istifadəçini tapır.
+// 2. Əgər istifadəçi tapılmazsa, xəta atır.
+// 3. Əgər istifadəçi tapılarsa, emailVerified sahəsini true edir.
+// 4. İstifadəçini yeniləyir və true qaytarır.
+// 5. Bu funksiya, istifadəçinin emailini təsdiqləmək üçün istifadə olunur.
+
 const verifyEmail = async (userId) => {
   const user = await UserModel.findById(userId);
   if (!user) {
@@ -15,7 +22,18 @@ const verifyEmail = async (userId) => {
   return true;
 };
 
+
+
 // Register
+
+// register funksiyası nə edir?
+// 1. Gələn userData ilə istifadəçini qeydiyyatdan keçirir.
+// 2. Əgər email və password göndərilməyibsə, xəta atır.
+// 3. Əgər email artıq mövcuddursa, xəta atır.
+// 4. Parolu hash edir və yeni istifadəçi yaradır.
+// 5. Yeni istifadəçini qaytarır.
+// 6. Bu funksiya, istifadəçi qeydiyyatı üçün istifadə olunur.
+
 const register = async (userData) => {
 
      if (!userData.email || !userData.password) {
@@ -46,7 +64,21 @@ const register = async (userData) => {
   return newUser;
 };
 
+
+
+
 // Login
+// loginUser funksiyası nə edir?
+// 1. Gələn identifier və password ilə istifadəçini daxil edir.
+// 2. Əgər identifier və ya password göndərilməyibsə, xəta atır.
+// 3. Email ilə istifadəçini tapır.
+// 4. Əgər istifadəçi tapılmazsa, xəta atır.
+// 5. Şifrəni yoxlayır.
+// 6. Əgər şifrə düzgün deyilsə, xəta atır.
+// 7. Əgər istifadəçi emailVerified deyilsə, xəta atır və təsdiq emaili göndərir.
+
+
+
 const loginUser = async ({ identifier, password }) => {
   console.log("Login funksiyası başladı");
 

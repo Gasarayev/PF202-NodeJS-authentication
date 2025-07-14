@@ -6,6 +6,13 @@ const { generateJWTtoken, verifyJWTtoken } = require("../utils/jwt");
 const { SERVER_URL } = require("../config/config");
 
 // POST /api/register
+// 1. Gələn req.body məlumatını konsola yazdırır.
+// 2. register funksiyasını çağıraraq istifadəçini qeydiyyatdan keçirir
+// 3. İstifadəçi uğurla qeydiyyatdan keçdikdən sonra JWT token yaradır.
+// 4. sendVerifyEmail funksiyasını çağıraraq istifadəçiyə təsdiq emaili göndərir.
+// 5. Uğurlu qeydiyyat mesajı ilə istifadəçiyə cavab qaytarır.
+// 6. Əgər hər hansı bir xəta baş verərsə, onu növbəti middleware-ə ötürür.
+
 const registerUserController = async (req, res, next) => {
     console.log("Gələn req.body (register):", req.body);
 
@@ -13,7 +20,6 @@ const registerUserController = async (req, res, next) => {
     const userData = req.body;
     const registeredUser = await register(userData);
     console.log("Gələn req.body (register):", req.body);
-
 
     const token = generateJWTtoken({
       id: registeredUser._id,
@@ -36,7 +42,18 @@ const registerUserController = async (req, res, next) => {
   }
 };
 
+
+
+
+
 // POST /api/login
+// loginUserController funksiyası nə edir?
+// 1. Gələn req.body məlumatını konsola yazdırır.
+// 2. loginUser funksiyasını çağıraraq istifadəçini daxil edir.
+// 3. Əgər istifadəçi uğurla daxil olarsa, istifadəçi məlumatlarını
+//    formatMongoData funksiyası ilə formatlayır və istifadəçiyə göndərir.
+// 4. Əgər hər hansı bir xəta baş verərsə, onu növbəti middleware-ə ötürür.
+
 const loginUserController = async (req, res, next) => {
   try {
     const { identifier, password } = req.body;
@@ -52,7 +69,17 @@ const loginUserController = async (req, res, next) => {
   }
 };
 
+
+
+
+
+
 // GET /api/profile
+// getProfileController funksiyası nə edir? setir setir?
+// 1. Gələn istifadəçi məlumatlarını əldə edir.
+// 2. Əgər istifadəçi tapılmazsa, 404 status kodu ilə cavab qaytarır.
+// 3. Əgər istifadəçi tapılarsa, istifadəçi məlumatlarını formatlayır və göndərir.
+// 4. Əgər hər hansı bir xəta baş verərsə, onu növbəti middleware-ə ötürür.
 const getProfileController = async (req, res, next) => {
   try {
     const users = await UserModel.find().select("-password");
@@ -73,6 +100,12 @@ const getProfileController = async (req, res, next) => {
   }
 };
 
+// verifyEmailController funksiyası nə edir? setir setir?
+// 1. Gələn tokeni yoxlayır və deşifrə edir.
+// 2. Əgər token etibarsızdırsa, xəta atır.
+// 3. Əgər token etibarlıdırsa, istifadəçinin emailini təsdiqləyir.
+// 4. Uğurlu təsdiq mesajı ilə istifadəçiyə cavab qaytarır.
+// 5. Əgər hər hansı bir xəta baş verərsə, onu növbəti middleware-ə ötürür.
 const verifyEmailController = async (req, res, next) => {
   try {
     const { token } = req.params;
@@ -91,6 +124,9 @@ const verifyEmailController = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
 
 module.exports = {
   registerUserController,
